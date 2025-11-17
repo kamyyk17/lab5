@@ -1,14 +1,25 @@
 public class Student {
-    private String name;
-    private int age;
+    private String firstName;  // Imię
+    private String lastName;   // Nazwisko
+    private int age;           // Wiek
+    private String major;      // Kierunek studiów
+    private String hobby;      // Hobby
+    private String sexualOrientation; // Orientacja seksualna
 
-    public Student(String name, int age) {
-        this.name = name;
+    // Konstruktor
+    public Student(String firstName, String lastName, int age, String major, String hobby, String sexualOrientation) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
+        this.major = major;
+        this.hobby = hobby;
+        this.sexualOrientation = sexualOrientation;
     }
 
+    // Nadpisana metoda toString() - wypisujemy wszystkie dane
     @Override
     public String toString() {
-        return "Student{name='" + name + "', age=" + age + "}";
+        return "Student{firstName='" + firstName + "', lastName='" + lastName + "', age=" + age +
+               ", major='" + major + "', hobby='" + hobby + "', sexualOrientation='" + sexualOrientation + "'}";
     }
 }

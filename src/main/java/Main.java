@@ -18,11 +18,20 @@ public class Main {
                 case "1":
                     // Dodawanie nowego studenta
                     System.out.print("Podaj imię studenta: ");
-                    String name = scanner.nextLine();
+                    String firstName = scanner.nextLine();
+                    System.out.print("Podaj nazwisko studenta: ");
+                    String lastName = scanner.nextLine();
                     System.out.print("Podaj wiek studenta: ");
                     int age = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Podaj kierunek studiów: ");
+                    String major = scanner.nextLine();
+                    System.out.print("Podaj hobby studenta: ");
+                    String hobby = scanner.nextLine();
+                    System.out.print("Podaj orientację seksualną studenta: ");
+                    String sexualOrientation = scanner.nextLine();
 
-                    Student newStudent = new Student(name, age);
+                    // Tworzenie nowego obiektu Student z wszystkimi wymaganymi danymi
+                    Student newStudent = new Student(firstName, lastName, age, major, hobby, sexualOrientation);
                     service.addStudent(newStudent);
                     System.out.println("Student " + newStudent + " został dodany.");
                     break;
