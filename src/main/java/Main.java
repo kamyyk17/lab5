@@ -1,27 +1,69 @@
-/*
-Kod bazowy programu Commit4_0: 
-• Program dodaje do prostej bazy danych (pliku db.txt) dane odnośnie Studentów.
-• Studenci dodawani są w klasie Main.
-• Wszyscy studenci są wypisywani na końcu klasy Main.
-• Klasa Service obsługuje odczyt i zapis do pliku bazy danych.
-• Klasa Student reprezentuje pojedynczego studenta (Imię, Wiek).
-*/
-
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 class Main {
-  public static void main(String[] args) {
-    try {
-      Service s = new Service();
-      s.addStudent(new Student("Krzysztof", 20));
-      s.addStudent(new Student("Janusz", 40));
 
-      var students = s.getStudents();
-      for(Student current : students) {
-        System.out.println(current.ToString());
-      }
-    } catch (IOException e) {
+    static class Student {
+        private String name;
+        private int age;
 
+        public Student(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{name='" + name + "', age=" + age + "}";
+        }
     }
-  }
+
+    static class Service {
+        private List<Student> students;
+
+        public Service() {
+            students = new ArrayList<>();
+        }
+
+        public void addStudent(Student student) {
+            students.add(student);
+        }
+
+        public List<Student> getStudents() {
+            return students;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Service s = new Service();
+
+        // Dodawanie studentów z konsoli
+        while (true) {
+            System.out.println("Podaj imię studenta (lub wpisz 'koniec' aby zakończyć): ");
+            String name = scanner.nextLine();
+            if (name.equalsIgnoreCase("koniec")) {
+                break; // Przerwij pętlę, jeśli użytkownik wpisze 'koniec'
+            }
+
+            System.out.println("Podaj wiek studenta: ");
+            int age = Integer.parseInt(scanner.nextLine()); // Odczytaj wiek jako liczbę całkowitą
+
+            // Tworzymy nowego studenta i dodajemy go do listy
+            Student newStudent = new Student(name, age);
+            s.addStudent(newStudent);
+
+            System.out.println("Student dodany: " + newStudent.toString());
+        }
+
+        // Wyświetlanie listy wszystkich studentów
+        System.out.println("\nLista wszystkich studentów:");
+        var students = s.getStudents();
+        for (Student current : students) {
+            System.out.println(current.toString());  // Wyświetlanie każdego studenta
+        }
+
+        scanner.close();  // Zamknięcie skanera po zakończeniu
+    }
 }
