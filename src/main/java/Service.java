@@ -1,36 +1,29 @@
-import java.util.Collection;
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-public class Service {
+  import java.util.ArrayList;
+  import java.util.List;
 
-  public void addStudent(Student student) throws IOException {
-    var f = new FileWriter("db.txt", true);
-    var b = new BufferedWriter(f);
-    b.append(student.ToString());
-    b.newLine();
-    b.close();
-  }
+  public class Service {
+      private List<Student> students;
 
-  public Collection<Student> getStudents() throws IOException {
-    var ret = new ArrayList<Student>();
-    var f = new FileReader("db.txt");
-    var reader = new BufferedReader(f);
-    String line = "";
-    while (true) {
-      line = reader.readLine();
-      if(line == null)
-        break;
-      ret.add(Student.Parse(line));
-    }
-    reader.close();
-    return ret;
-  }
+      public Service() {
+          students = new ArrayList<>();
+      }
 
-  public Student findStudentByName(String name) {
-    return null;
+      public void addStudent(Student student) {
+          students.add(student);
+      }
+
+      public List<Student> getStudents() {
+          return students;
+      }
+
+      public void printAllStudents() {
+          if (students.isEmpty()) {
+              System.out.println("Brak studentów w bazie.");
+          } else {
+              System.out.println("\nLista wszystkich studentów:");
+              for (Student student : students) {
+                  System.out.println(student);
+              }
+          }
+      }
   }
-}
