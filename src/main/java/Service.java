@@ -1,33 +1,66 @@
-import java.util.ArrayList;
-import java.util.List;
+    import java.io.*;
+    import java.util.*;
 
-public class Service {
+    public class Service {
 
-    private List<Student> students = new ArrayList<>();
+        private List<Student> students = new ArrayList<>();
 
-    public void addStudent(Student student) {
-        students.add(student);
-    }
-
-    public void printAllStudents() {
-        if (students.isEmpty()) {
-            System.out.println("Brak studentów.");
-            return;
+        public void addStudent(Student student) {
+            students.add(student);
+            saveToFile();
         }
 
-        for (Student s : students) {
-            System.out.println(s);
-        }
-    }
-
-    
-    public Student findStudentByName(String firstName, String lastName) {
-        for (Student student : students) {
-            if (student.getFirstName().equalsIgnoreCase(firstName)
-                    && student.getLastName().equalsIgnoreCase(lastName)) {
-                return student;
+        public void printAllStudents() {
+            for (Student s : students) {
+                System.out.println(s);
             }
         }
-        return null;
+
+        public Student findStudentByName(String firstName, String lastName) {
+            for (Student s : students) {
+                if (s.getFirstName().equalsIgnoreCase(firstName)
+                        && s.getLastName().equalsIgnoreCase(lastName)) {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+        // ------------------ NOWA METODA ------------------
+        public boolean deleteStudentByName(String firstName, String lastName) {
+            boolean removed = students.removeIf(s ->
+                    s.getFirstName().equalsIgnoreCase(firstName)
+                            && s.getLastName().equalsIgnoreCase(lastName)
+            );
+
+            if (removed) {
+                saveToFile(); // zapisujemy zmiany do pliku
+            }
+
+            return removed;
+        }
+        // -------------------------------------------------
+
+
+        // ------- zapis listy studentów do pliku ----------
+        private void saveToFile() {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("db.txt"))) {
+
+                for (Student s : students) {
+                    bw.write(
+                            s.getFirstName() + ";" +
+                            s.getLastName() + ";" +
+                            s.getAge() + ";" +
+                            s.getMajor() + ";" +
+                            s.getHobby() + ";" +
+                            s.getSexualOrientation() + ";" +
+                            s.getDateOfBirth()
+                    );
+                    bw.newLine();
+                }
+
+            } catch (IOException e) {
+                System.out.println("Błąd zapisu danych: " + e.getMessage());
+            }
+        }
     }
-}

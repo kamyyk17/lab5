@@ -18,8 +18,34 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
+    // GETTERY
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public String getSexualOrientation() {
+        return sexualOrientation;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
 
     @Override
     public String toString() {

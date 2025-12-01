@@ -10,7 +10,8 @@ public class Main {
             System.out.println("1. Dodaj nowego studenta");
             System.out.println("2. Wypisz wszystkich studentów");
             System.out.println("3. Wyszukaj studenta");
-            System.out.println("4. Zakończ program");
+             System.out.println("4. Usuń studenta");
+            System.out.println("5. Zakończ program");
             System.out.print("Wybór: ");
 
             String choice = scanner.nextLine();
@@ -75,13 +76,30 @@ public class Main {
                     break;
 
                 case "4":
-                    System.out.println("Zamykanie programu.");
-                    scanner.close();
-                    return;
+ System.out.print("Podaj imię studenta do usunięcia: ");
+        String delFirst = scanner.nextLine();
 
-                default:
-                    System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
-                    break;
+        System.out.print("Podaj nazwisko studenta do usunięcia: ");
+        String delLast = scanner.nextLine();
+
+        boolean deleted = service.deleteStudentByName(delFirst, delLast);
+
+        if (deleted) {
+            System.out.println("Student został usunięty.");
+        } else {
+            System.out.println("Nie znaleziono studenta o podanych danych.");
+        }
+        break;
+
+    case "5":
+        System.out.println("Zamykanie programu.");
+        scanner.close();
+        return;
+
+    default:
+        System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
+        break;
+
             }
         }
     }
