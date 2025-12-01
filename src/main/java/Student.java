@@ -5,7 +5,7 @@ public class Student {
     private String major;
     private String hobby;
     private String sexualOrientation;
-    private String dateOfBirth; 
+    private String dateOfBirth;
 
     public Student(String firstName, String lastName, int age, String major,
                    String hobby, String sexualOrientation, String dateOfBirth) {
@@ -17,6 +17,9 @@ public class Student {
         this.sexualOrientation = sexualOrientation;
         this.dateOfBirth = dateOfBirth;
     }
+
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
 
     @Override
     public String toString() {
