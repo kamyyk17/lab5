@@ -16,33 +16,47 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    // Dodawanie nowego studenta
                     System.out.print("Podaj imię studenta: ");
                     String firstName = scanner.nextLine();
+
                     System.out.print("Podaj nazwisko studenta: ");
                     String lastName = scanner.nextLine();
+
                     System.out.print("Podaj wiek studenta: ");
                     int age = Integer.parseInt(scanner.nextLine());
+
                     System.out.print("Podaj kierunek studiów: ");
                     String major = scanner.nextLine();
+
                     System.out.print("Podaj hobby studenta: ");
                     String hobby = scanner.nextLine();
+
                     System.out.print("Podaj orientację seksualną studenta: ");
                     String sexualOrientation = scanner.nextLine();
 
-                    // Tworzenie nowego obiektu Student z wszystkimi wymaganymi danymi
-                    Student newStudent = new Student(firstName, lastName, age, major, hobby, sexualOrientation);
+                    System.out.print("Podaj datę urodzenia (np. 2000-05-11): ");
+                    String dateOfBirth = scanner.nextLine();
+
+                    // Nowy konstruktor z dodatkową datą urodzenia
+                    Student newStudent = new Student(
+                            firstName,
+                            lastName,
+                            age,
+                            major,
+                            hobby,
+                            sexualOrientation,
+                            dateOfBirth
+                    );
+
                     service.addStudent(newStudent);
-                    System.out.println("Student " + newStudent + " został dodany.");
+                    System.out.println("Student został dodany.");
                     break;
 
                 case "2":
-                    // Wypisanie wszystkich studentów
                     service.printAllStudents();
                     break;
 
                 case "3":
-                    // Zakończenie programu
                     System.out.println("Zamykanie programu.");
                     scanner.close();
                     return;
